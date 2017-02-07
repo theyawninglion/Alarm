@@ -10,9 +10,32 @@ import UIKit
 
 class AlarmDetailTableViewController: UITableViewController {
     
-    let alarm: Alarm?
+    var alarmPlaceHolder: Alarm?
     
-    private  func updateViews()
+    func updateViews(){
+        
+        
+        
+        
+        var alarm: Alarm?{
+            didSet{
+                guard let alarm = alarm else {return}
+                datePicker.date = alarm.fireDate?
+                nameForAlarmTextField.text = alarm.name
+                
+                if alarm.enable == true{
+                    enableButtonTextField.text = "Disable"
+                    enableButtonTextField.backgroundColor = .red
+                    enableButtonTextField.textColor = .white
+                    
+                }else{
+                    enableButtonTextField.text = "Enable"
+                    enableButtonTextField.backgroundColor = .white
+                    enableButtonTextField.textColor = .teal
+                }
+            }
+        }
+    }
     
     
     @IBOutlet weak var nameForAlarmTextField: UITextField!
@@ -21,6 +44,7 @@ class AlarmDetailTableViewController: UITableViewController {
     
     
     @IBAction func enableButtonTapped(_ sender: Any) {
+        
     }
     @IBAction func saveButtonTapped(_ sender: Any) {
         
